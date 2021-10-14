@@ -54,10 +54,9 @@ export default {
   },
   watch: {
     value() {
-      this.validateInput();
-    },
-    errorMessages(v) {
-      console.log("error messages", v);
+      if (this.validations !== undefined) {
+        this.validateInput();
+      }
     },
   },
   methods: {
@@ -65,7 +64,6 @@ export default {
       this.$emit("input", value);
     },
     validateInput() {
-      console.log("validating...");
       this.errorMessages = [];
 
       // Input is Required validation - check if the field is empty
@@ -98,6 +96,18 @@ export default {
           `${this.label} should not be longer than ${this.validations.maxLength} characters.`
         );
       }
+
+      // Mail format validation
+      if (this.type === "email" && !this.validateEmail(this.value)) {
+        this.errorMessages.push("Please enter valid email.");
+      }
+    },
+    validateEmail(email) {
+      // eslint-disable-next-line no-useless-escape
+      const mailFormat = /\S+@\S+\.\S+/;
+
+      if (!mailFormat.test(email)) return false;
+      return true;
     },
   },
 };

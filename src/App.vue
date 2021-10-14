@@ -13,29 +13,23 @@
         label="Email"
         inputId="email"
         type="email"
+        :validations="validations.form.email"
       />
       <input-field
         v-model="form.subject"
         label="Subject"
         inputId="subject"
         type="text"
+        :validations="validations.form.subject"
       />
       <input-field
         v-model="form.message"
         label="Message"
         inputId="message"
         type="text"
+        :validations="validations.form.message"
         isTextarea
       />
-      <!--
-        <label for="name">Name<span style="color: red"> *</span></label>
-        <input v-model="form.name" id="name" type="text" />
-        <ul v-if="validations.form.name.length !== 0">
-          <li v-for="(validation, index) in validations.form.name" :key="index">
-            {{ validation }}
-          </li>
-        </ul>
-        -->
       <button type="submit">Send</button>
     </form>
   </div>
@@ -55,6 +49,19 @@ export default {
             required: true,
             minLength: 5,
             maxLength: 50,
+            type: "string",
+          },
+          email: {
+            required: true,
+          },
+          subject: {
+            required: false,
+            maxLength: 100,
+            type: "string",
+          },
+          message: {
+            required: true,
+            maxLength: 500,
             type: "string",
           },
         },
