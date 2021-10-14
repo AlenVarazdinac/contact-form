@@ -1,49 +1,78 @@
 <template>
   <div id="app">
     <form class="form" @submit.prevent="submitForm">
-      <div class="input-wrapper">
+      <input-field
+        v-model="form.name"
+        label="Name"
+        inputId="name"
+        type="text"
+        :validations="validations.form.name"
+      />
+      <input-field
+        v-model="form.email"
+        label="Email"
+        inputId="email"
+        type="email"
+      />
+      <input-field
+        v-model="form.subject"
+        label="Subject"
+        inputId="subject"
+        type="text"
+      />
+      <input-field
+        v-model="form.message"
+        label="Message"
+        inputId="message"
+        type="text"
+        isTextarea
+      />
+      <!--
         <label for="name">Name<span style="color: red"> *</span></label>
         <input v-model="form.name" id="name" type="text" />
-      </div>
-      <div class="input-wrapper">
-        <label for="email">Email<span style="color: red"> *</span></label>
-        <input v-model="form.email" id="email" type="email" />
-      </div>
-      <div class="input-wrapper">
-        <label for="subject"
-          >Subject<span style="color: grey"> (optional)</span></label
-        >
-        <input v-model="form.subject" id="subject" type="text" />
-      </div>
-      <div class="input-wrapper">
-        <label for="message">Message<span style="color: red"> *</span></label>
-        <textarea v-model="form.message" id="message"></textarea>
-      </div>
+        <ul v-if="validations.form.name.length !== 0">
+          <li v-for="(validation, index) in validations.form.name" :key="index">
+            {{ validation }}
+          </li>
+        </ul>
+        -->
       <button type="submit">Send</button>
     </form>
   </div>
 </template>
 
 <script>
+import InputField from "./components/InputField";
+
 export default {
   name: "App",
-  components: {},
+  components: { InputField },
   data() {
     return {
+      validations: {
+        form: {
+          name: {
+            required: true,
+            minLength: 5,
+            maxLength: 50,
+            type: "string",
+          },
+        },
+      },
       form: {
         name: "",
         email: "",
         subject: "",
         message: "",
       },
-    }
+    };
   },
   methods: {
     submitForm() {
-      console.log("form", this.form)
+      console.log("form", this.form);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">
