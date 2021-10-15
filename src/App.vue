@@ -3,6 +3,7 @@
     <form class="form" @submit.prevent="submitForm">
       <input-field
         v-model="form.name"
+        ref="name"
         label="Name"
         inputId="name"
         type="text"
@@ -10,6 +11,7 @@
       />
       <input-field
         v-model="form.email"
+        ref="email"
         label="Email"
         inputId="email"
         type="email"
@@ -17,6 +19,7 @@
       />
       <input-field
         v-model="form.subject"
+        ref="subject"
         label="Subject"
         inputId="subject"
         type="text"
@@ -24,15 +27,14 @@
       />
       <input-field
         v-model="form.message"
+        ref="message"
         label="Message"
         inputId="message"
         type="text"
         :validations="validations.form.message"
         isTextarea
       />
-      <button type="submit" :disabled="this.getErrorMessages.length !== 0">
-        Send
-      </button>
+      <button type="submit">Send</button>
     </form>
   </div>
 </template>
@@ -83,7 +85,12 @@ export default {
     },
   },
   methods: {
+    touchInputs() {
+      const formKeys = Object.keys(this.form);
+      formKeys.forEach((key) => this.$refs[key].validateInput());
+    },
     submitForm() {
+      this.touchInputs();
       if (this.getErrorMessages.length !== 0) return;
       this.isFormSubmitting = true;
       console.log("submitting....");

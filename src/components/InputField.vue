@@ -84,9 +84,6 @@ export default {
           key: this.inputId,
         });
       }
-      if (this.errorMessages.length <= 0) {
-        this.$store.commit("changeFormValidState", true);
-      }
     },
     validateEmail(email) {
       // eslint-disable-next-line no-useless-escape
