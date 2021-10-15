@@ -59,13 +59,46 @@ export default {
       }
     },
   },
+  computed: {
+    getErrorMessages() {
+      return this.$store.getters.getErrorMessages;
+    },
+  },
   methods: {
     updateValue(value) {
       this.$emit("input", value);
     },
-    validateInput() {
+    async validateInput() {
       this.errorMessages = [];
+      await this.$store.commit("removeErrorMessageKey", {
+        key: this.inputId,
+      });
 
+      this.validate();
+
+      if (
+        this.errorMessages.length > 0 &&
+        !this.doesErrorMessageKeyExists(this.inputId)
+      ) {
+        await this.$store.commit("addErrorMessageKey", {
+          key: this.inputId,
+        });
+      }
+      if (this.errorMessages.length <= 0) {
+        this.$store.commit("changeFormValidState", true);
+      }
+    },
+    validateEmail(email) {
+      // eslint-disable-next-line no-useless-escape
+      const mailFormat = /\S+@\S+\.\S+/;
+
+      if (!mailFormat.test(email)) return false;
+      return true;
+    },
+    doesErrorMessageKeyExists(key) {
+      return this.getErrorMessages.includes(key);
+    },
+    validate() {
       // Input is Required validation - check if the field is empty
       if (this.validations.required && this.value === "") {
         this.errorMessages.push(`${this.label} is required.`);
@@ -101,13 +134,6 @@ export default {
       if (this.type === "email" && !this.validateEmail(this.value)) {
         this.errorMessages.push("Please enter valid email.");
       }
-    },
-    validateEmail(email) {
-      // eslint-disable-next-line no-useless-escape
-      const mailFormat = /\S+@\S+\.\S+/;
-
-      if (!mailFormat.test(email)) return false;
-      return true;
     },
   },
 };

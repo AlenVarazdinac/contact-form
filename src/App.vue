@@ -30,7 +30,9 @@
         :validations="validations.form.message"
         isTextarea
       />
-      <button type="submit">Send</button>
+      <button type="submit" :disabled="this.getErrorMessages.length !== 0">
+        Send
+      </button>
     </form>
   </div>
 </template>
@@ -72,11 +74,34 @@ export default {
         subject: "",
         message: "",
       },
+      isFormSubmitting: false,
     };
+  },
+  computed: {
+    getErrorMessages() {
+      return this.$store.getters.getErrorMessages;
+    },
   },
   methods: {
     submitForm() {
-      console.log("form", this.form);
+      if (this.getErrorMessages.length !== 0) return;
+      this.isFormSubmitting = true;
+      console.log("submitting....");
+      try {
+        // const payload = {
+        //   name: this.form.name,
+        //   email: this.form.email,
+        //   subject: this.form.subject,
+        //   message: this.form.message,
+        // };
+        // this.axios.post(
+        //   "https://5d9f7fe94d823c0014dd323d.mockapi.io/api/message",
+        //   payload
+        // );
+      } catch (e) {
+        console.log(e);
+      }
+      this.isFormSubmitting = false;
     },
   },
 };
