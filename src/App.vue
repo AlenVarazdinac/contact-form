@@ -34,7 +34,10 @@
         :validations="validations.form.message"
         isTextarea
       />
-      <button type="submit">Send</button>
+      <button type="submit">
+        <span v-show="isFormSubmitting" class="loader"></span>
+        <p>Send</p>
+      </button>
     </form>
   </div>
 </template>
@@ -89,22 +92,22 @@ export default {
       const formKeys = Object.keys(this.form);
       formKeys.forEach((key) => this.$refs[key].validateInput());
     },
-    submitForm() {
+    async submitForm() {
       this.touchInputs();
       if (this.getErrorMessages.length !== 0) return;
       this.isFormSubmitting = true;
       console.log("submitting....");
       try {
-        // const payload = {
-        //   name: this.form.name,
-        //   email: this.form.email,
-        //   subject: this.form.subject,
-        //   message: this.form.message,
-        // };
-        // this.axios.post(
-        //   "https://5d9f7fe94d823c0014dd323d.mockapi.io/api/message",
-        //   payload
-        // );
+        const payload = {
+          name: this.form.name,
+          email: this.form.email,
+          subject: this.form.subject,
+          message: this.form.message,
+        };
+        await this.axios.post(
+          "https://5d9f7fe94d823c0014dd323d.mockapi.io/api/message",
+          payload
+        );
       } catch (e) {
         console.log(e);
       }
@@ -145,6 +148,35 @@ export default {
   align-items: flex-start;
   &:not(:last-child) {
     margin-bottom: 15px;
+  }
+}
+
+.loader {
+  border: 3px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 3px solid #3498db;
+  width: 15px;
+  height: 15px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 </style>
