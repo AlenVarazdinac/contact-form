@@ -1,45 +1,48 @@
 <template>
-  <form class="form-card" @submit.prevent="submitForm">
-    <div class="form-card--control-wrapper">
-      <input-field
-        v-model="form.name"
-        ref="name"
-        label="Name"
-        inputId="name"
-        type="text"
-        :validations="validations.form.name"
-      />
-      <input-field
-        v-model="form.email"
-        ref="email"
-        label="Email"
-        inputId="email"
-        type="email"
-        :validations="validations.form.email"
-      />
-      <input-field
-        v-model="form.subject"
-        ref="subject"
-        label="Subject"
-        inputId="subject"
-        type="text"
-        :validations="validations.form.subject"
-      />
-      <input-field
-        v-model="form.message"
-        ref="message"
-        label="Message"
-        inputId="message"
-        type="text"
-        :validations="validations.form.message"
-        isTextarea
-      />
-      <button type="submit">
-        <span v-show="isFormSubmitting" class="loader"></span>
-        <p>Send</p>
-      </button>
-    </div>
-  </form>
+  <div>
+    <form class="form-card" @submit.prevent="submitForm">
+      <h1>Contact us</h1>
+      <div class="form-card--control-wrapper">
+        <input-field
+          v-model="form.name"
+          ref="name"
+          label="Name"
+          inputId="name"
+          type="text"
+          :validations="validations.form.name"
+        />
+        <input-field
+          v-model="form.email"
+          ref="email"
+          label="Email"
+          inputId="email"
+          type="email"
+          :validations="validations.form.email"
+        />
+        <input-field
+          v-model="form.subject"
+          ref="subject"
+          label="Subject"
+          inputId="subject"
+          type="text"
+          :validations="validations.form.subject"
+        />
+        <input-field
+          v-model="form.message"
+          ref="message"
+          label="Message"
+          inputId="message"
+          type="text"
+          :validations="validations.form.message"
+          isTextarea
+        />
+        <button type="submit">
+          <span v-show="isFormSubmitting" class="loader"></span>
+          <p>Send</p>
+        </button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -132,7 +135,9 @@ export default {
     0.6px 2.5px 6.3px rgba(0, 0, 0, 0.025),
     1.1px 4.5px 11.2px rgba(0, 0, 0, 0.03),
     2.1px 8.4px 20.9px rgba(0, 0, 0, 0.036), 5px 20px 50px rgba(0, 0, 0, 0.05);
-
+  & h1 {
+    margin-bottom: 25px;
+  }
   &--control-wrapper {
     display: flex;
     flex-direction: column;

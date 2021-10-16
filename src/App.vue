@@ -21,12 +21,13 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  height: 100vh;
-  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
 .contact-form-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 50px;
 }
 </style>
