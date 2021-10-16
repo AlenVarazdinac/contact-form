@@ -13,6 +13,7 @@
       v-else
       :id="inputId"
       :value="value"
+      rows="4"
       @input="updateValue($event.target.value)"
       class="input-field-wrapper--input"
     ></textarea>
@@ -113,9 +114,10 @@ export default {
   &--input {
     border: 1px solid lighten(#000000, 15%) !important;
     margin-bottom: 15px;
-    height: 20px;
+    min-height: 20px;
     width: 200px;
     padding: 5px 10px;
+    resize: vertical;
   }
   &--error-messages {
     margin: 0;
