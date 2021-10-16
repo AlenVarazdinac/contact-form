@@ -93,7 +93,7 @@ export default {
       formKeys.forEach((key) => this.$refs[key].validateInput());
     },
     async submitForm() {
-      this.touchInputs();
+      await this.touchInputs();
       if (this.getErrorMessages.length !== 0) return;
       this.isFormSubmitting = true;
       console.log("submitting....");

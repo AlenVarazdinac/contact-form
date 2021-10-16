@@ -23,7 +23,10 @@
 </template>
 
 <script>
+import InputValidationMixin from "../mixins/InputValidationMixin";
+
 export default {
+  mixins: [InputValidationMixin],
   props: {
     label: {
       type: String,
@@ -69,6 +72,7 @@ export default {
       this.$emit("input", value);
     },
     async validateInput() {
+      // Clear error messages on validation start
       this.errorMessages = [];
       await this.$store.commit("removeErrorMessageKey", {
         key: this.inputId,
@@ -76,6 +80,7 @@ export default {
 
       this.validate();
 
+      // Add error message key if it does not exists
       if (
         this.errorMessages.length > 0 &&
         !this.doesErrorMessageKeyExists(this.inputId)
@@ -85,52 +90,8 @@ export default {
         });
       }
     },
-    validateEmail(email) {
-      // eslint-disable-next-line no-useless-escape
-      const mailFormat = /\S+@\S+\.\S+/;
-
-      if (!mailFormat.test(email)) return false;
-      return true;
-    },
     doesErrorMessageKeyExists(key) {
       return this.getErrorMessages.includes(key);
-    },
-    validate() {
-      // Input is Required validation - check if the field is empty
-      if (this.validations.required && this.value === "") {
-        this.errorMessages.push(`${this.label} is required.`);
-      }
-
-      // Check if the input is string
-      if (this.validations.type === "string" && this.type !== "text") {
-        this.errorMessages.push(`Only text input is allowed.`);
-      }
-
-      // Minimum length validation
-      if (
-        this.value !== "" &&
-        this.validations.minLength &&
-        this.value.length + 1 <= this.validations.minLength
-      ) {
-        this.errorMessages.push(
-          `${this.label} should be at least ${this.validations.minLength} characters long`
-        );
-      }
-
-      // Maximum length validation
-      if (
-        this.validations.maxLength &&
-        this.value.length - 1 >= this.validations.maxLength
-      ) {
-        this.errorMessages.push(
-          `${this.label} should not be longer than ${this.validations.maxLength} characters.`
-        );
-      }
-
-      // Mail format validation
-      if (this.type === "email" && !this.validateEmail(this.value)) {
-        this.errorMessages.push("Please enter valid email.");
-      }
     },
   },
 };
