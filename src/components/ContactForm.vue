@@ -37,7 +37,7 @@
           isTextarea
         />
         <button type="submit">
-          <span class="loader"></span>
+          <span v-show="isFormSubmitting" class="loader"></span>
           <p>Send</p>
         </button>
       </div>
