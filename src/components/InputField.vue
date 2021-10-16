@@ -1,20 +1,25 @@
 <template>
   <div class="input-field-wrapper">
-    <label :for="inputId">{{ label }}</label>
+    <label :for="inputId" class="input-field-wrapper--label">{{ label }}</label>
     <input
       v-if="!isTextarea"
       :id="inputId"
       :type="type"
       :value="value"
       @input="updateValue($event.target.value)"
+      class="input-field-wrapper--input"
     />
     <textarea
       v-else
       :id="inputId"
       :value="value"
       @input="updateValue($event.target.value)"
+      class="input-field-wrapper--input"
     ></textarea>
-    <ul v-if="errorMessages.length !== 0">
+    <ul
+      v-if="errorMessages.length !== 0"
+      class="input-field-wrapper--error-messages"
+    >
       <li v-for="(message, index) in errorMessages" :key="index">
         {{ message }}
       </li>
@@ -102,5 +107,22 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  &--label {
+    margin-bottom: 5px;
+  }
+  &--input {
+    border: 1px solid lighten(#000000, 15%) !important;
+    margin-bottom: 15px;
+    height: 20px;
+    width: 200px;
+    padding: 5px 10px;
+  }
+  &--error-messages {
+    margin: 0;
+    padding: 0;
+    color: #f12323;
+    margin-bottom: 15px;
+    padding-left: 20px;
+  }
 }
 </style>
