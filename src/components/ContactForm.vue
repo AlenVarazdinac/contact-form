@@ -37,7 +37,7 @@
           isTextarea
         />
         <button type="submit">
-          <span v-show="isFormSubmitting" class="loader"></span>
+          <span class="loader"></span>
           <p>Send</p>
         </button>
       </div>
@@ -143,11 +143,15 @@ export default {
     flex-direction: column;
     & button {
       display: flex;
+      align-items: center;
       align-self: flex-end;
       background-color: #1962e9;
       color: #ffffff;
       border: none;
       padding: 10px 30px;
+      & span {
+        margin-right: 10px;
+      }
       & p {
         padding: 0;
         margin: 0;
