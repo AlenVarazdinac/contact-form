@@ -6,6 +6,7 @@
       :id="inputId"
       :type="type"
       :value="value"
+      :data-qa="dataQa"
       @input="updateValue($event.target.value)"
       class="input-field-wrapper--input"
     />
@@ -14,6 +15,7 @@
       :id="inputId"
       :value="value"
       rows="4"
+      :data-qa="dataQa"
       @input="updateValue($event.target.value)"
       class="input-field-wrapper--input"
     ></textarea>
@@ -54,6 +56,10 @@ export default {
     },
     validations: {
       type: Object,
+    },
+    dataQa: {
+      type: String,
+      default: "",
     },
   },
   data() {

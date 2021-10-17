@@ -10,6 +10,7 @@
           inputId="name"
           type="text"
           :validations="validations.form.name"
+          data-qa="input-name"
         />
         <input-field
           v-model="form.email"
@@ -18,6 +19,7 @@
           inputId="email"
           type="email"
           :validations="validations.form.email"
+          data-qa="input-email"
         />
         <input-field
           v-model="form.subject"
@@ -26,6 +28,7 @@
           inputId="subject"
           type="text"
           :validations="validations.form.subject"
+          data-qa="input-subject"
         />
         <input-field
           v-model="form.message"
@@ -35,8 +38,9 @@
           type="text"
           :validations="validations.form.message"
           isTextarea
+          data-qa="input-message"
         />
-        <button type="submit">
+        <button type="submit" data-qa="submit">
           <span v-show="isFormSubmitting" class="loader"></span>
           <p>Send</p>
         </button>
