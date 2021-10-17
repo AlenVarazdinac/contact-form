@@ -111,8 +111,17 @@ export default {
           "https://5d9f7fe94d823c0014dd323d.mockapi.io/api/message",
           payload
         );
+        this.$toastNotification.show({
+          headerText: "Success",
+          bodyText: "Message successfully sent!",
+          type: "success",
+        });
       } catch (e) {
-        console.log(e);
+        this.$toastNotification.show({
+          headerText: "Error",
+          bodyText: "Something went wrong!",
+          type: "error",
+        });
       }
       this.isFormSubmitting = false;
     },
@@ -141,6 +150,7 @@ export default {
   &--control-wrapper {
     display: flex;
     flex-direction: column;
+    width: 350px;
     & button {
       display: flex;
       align-items: center;

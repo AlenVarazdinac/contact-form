@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <toast-notification />
     <div class="contact-form-wrapper">
       <contact-form />
     </div>

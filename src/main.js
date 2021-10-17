@@ -4,9 +4,11 @@ import store from "./store";
 import axios from "axios";
 import VueAxios from "vue-axios";
 import "./registerServiceWorker";
+import ToastNotification from "./plugins/ToastNotification";
 
 Vue.config.productionTip = false;
 
+Vue.use(ToastNotification);
 Vue.use(VueAxios, axios);
 
 new Vue({

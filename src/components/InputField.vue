@@ -115,9 +115,11 @@ export default {
     border: 1px solid lighten(#000000, 15%) !important;
     margin-bottom: 15px;
     min-height: 20px;
-    width: 200px;
+    min-width: 200px;
     padding: 5px 10px;
     resize: vertical;
+    // calc = 100% width - (horizontal padding + border)
+    width: calc(100% - 22px);
   }
   &--error-messages {
     margin: 0;
