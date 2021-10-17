@@ -59,11 +59,12 @@ export default {
   data() {
     return {
       errorMessages: [],
+      isInputResetting: false,
     };
   },
   watch: {
     value() {
-      if (this.validations !== undefined) {
+      if (this.validations !== undefined && !this.isInputResetting) {
         this.validateInput();
       }
     },
@@ -74,6 +75,13 @@ export default {
     },
   },
   methods: {
+    async resetInput() {
+      this.isInputResetting = true;
+      this.errorMessages = [];
+      await this.$store.commit("removeErrorMessageKey", {
+        key: this.inputId,
+      });
+    },
     updateValue(value) {
       this.$emit("input", value);
     },

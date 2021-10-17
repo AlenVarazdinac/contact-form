@@ -14,9 +14,6 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    clearErrorMessages(state) {
-      state.errorMessages = [];
-    },
     addErrorMessageKey(state, payload) {
       state.errorMessages.push(payload.key);
     },

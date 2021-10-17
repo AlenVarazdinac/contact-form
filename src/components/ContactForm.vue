@@ -91,6 +91,16 @@ export default {
     },
   },
   methods: {
+    resetInputs() {
+      this.form = {
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      };
+      const formKeys = Object.keys(this.form);
+      formKeys.forEach((key) => this.$refs[key].resetInput());
+    },
     touchInputs() {
       const formKeys = Object.keys(this.form);
       formKeys.forEach((key) => this.$refs[key].validateInput());
@@ -99,7 +109,6 @@ export default {
       await this.touchInputs();
       if (this.getErrorMessages.length !== 0) return;
       this.isFormSubmitting = true;
-      console.log("submitting....");
       try {
         const payload = {
           name: this.form.name,
@@ -116,10 +125,11 @@ export default {
           bodyText: "Message successfully sent!",
           type: "success",
         });
+        this.resetInputs();
       } catch (e) {
         this.$toastNotification.show({
           headerText: "Error",
-          bodyText: "Something went wrong!",
+          bodyText: e.response.data,
           type: "error",
         });
       }
