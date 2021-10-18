@@ -1,29 +1,45 @@
 # contact-form
 
+## Runtime requirements
+
+```
+NodeJS - version 8.9 or above (v10+ recommended)
+```
+
 ## Project setup
+
+1. Clone project
+
 ```
+
+git clone git@github.com:AlenVarazdinac/contact-form.git ContactFormTask
+
+```
+
+2. Install packages
+
+```
+
 npm install
+
 ```
 
-### Compiles and hot-reloads for development
+3. Compile and serve the project
+
 ```
+
 npm run serve
+
 ```
 
-### Compiles and minifies for production
-```
-npm run build
+### Run unit tests
+
 ```
 
-### Run your unit tests
-```
 npm run test:unit
+
 ```
 
-### Lints and fixes files
-```
-npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
