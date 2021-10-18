@@ -1,16 +1,18 @@
 <template>
-  <div
-    v-if="$toastNotification.isToastNotificationVisible"
-    class="toast"
-    :class="toastType($toastNotification.type)"
-  >
-    <div class="toast--title">
-      {{ $toastNotification.headerText }}
+  <transition name="slide">
+    <div
+      v-if="$toastNotification.isToastNotificationVisible"
+      class="toast"
+      :class="toastType($toastNotification.type)"
+    >
+      <div class="toast--title">
+        {{ $toastNotification.headerText }}
+      </div>
+      <div class="toast--body">
+        {{ $toastNotification.bodyText }}
+      </div>
     </div>
-    <div class="toast--body">
-      {{ $toastNotification.bodyText }}
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -83,5 +85,16 @@ export default {
     padding: 10px 10px;
     font-size: 14px;
   }
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.6s ease;
+}
+
+.slide-enter,
+.slide-leave-to {
+  transform: translateX(30px);
+  opacity: 0;
 }
 </style>
