@@ -1,4 +1,4 @@
-# contact-form
+# Contact form
 
 ## Runtime requirements
 
